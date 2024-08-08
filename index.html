@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Launcher</title>
+    <style>
+       
+       
+       
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1d1f20;
+            color: #f4f4f4;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #282a36;
+            padding: 20px 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f4f4f4;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        header nav ul li a:hover {
+            color: #6272a4;
+        }
+
+        .active-section {
+            display: block;
+        }
+
+        .hidden-section {
+            display: none;
+        }
+
+        .hero {
+            color: #f4f4f4;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #6272a4;
+            color: #f4f4f4;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #44475a;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .about-section,
+        .games-section,
+        .faq-section,
+        .cart-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .about-section h2,
+        .games-section h2,
+        .faq-section h2,
+        .cart-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .game {
+            background-color: #44475a;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .game h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .game p {
+            font-size: 18px;
+        }
+
+        .faq-item {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #44475a;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .faq-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .form-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #44475a;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .form-container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #6272a4;
+            color: #f4f4f4;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #44475a;
+        }
+
+        .profile-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .profile-container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #44475a;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .profile-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .profile-container input[type="file"] {
+            display: none;
+        }
+
+        .profile-container label {
+            background-color: #6272a4;
+            color: #f4f4f4;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-container label:hover {
+            background-color: #44475a;
+        }
+
+        footer {
+            background-color: #282a36;
+            color: #f4f4f4;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        .developer-portal {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .user-list {
+            margin-top: 20px;
+        }
+
+        .user-item {
+            background-color: #44475a;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-status {
+            font-size: 14px;
+        }
+
+        .search-bar {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 80%;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #44475a;
+            border-radius: 5px;
+        }
+
+        .cart-item h4 {
+            font-size: 20px;
+        }
+
+        .comment-section {
+            margin-top: 30px;
+        }
+
+        .comment {
+            background-color: #44475a;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .comment p {
+            margin-bottom: 5px;
+        }
+
+        .comment button {
+            background-color: #6272a4;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment button:hover {
+            background-color: #44475a;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo" onclick="navigate('home')">FM Launcher</div>
+        <nav>
+            <ul>
+                <li><a href="#" id="home-btn" class="active" onclick="navigate('home')">Accueil</a></li>
+                <li><a href="#" onclick="navigate('about')">À propos</a></li>
+                <li><a href="#" onclick="navigate('games')">Jeux</a></li>
+                <li><a href="#" onclick="navigate('faq')">FAQ</a></li>
+                <li><a href="#" onclick="navigate('cart')">Panier</a></li>
+                <li id="signup-link"><a href="#" onclick="showSignup()">Inscription</a></li>
+                <li id="login-link"><a href="#" onclick="showLogin()">Connexion</a></li>
+                <li id="profile-link" class="hidden"><a href="#" onclick="navigate('profile')">Mon Profil</a></li>
+                <li id="developer-link" class="hidden"><a href="#" onclick="promptPassword()">Portail Développeur</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Bienvenue sur FM Launcher</h2>
+            <p>Découvrez les meilleurs jeux et devenez développeur sur notre plateforme.</p>
+            <a href="#" class="btn-primary" onclick="navigate('games')">Explorer les jeux</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section hidden-section">
+        <div class="container">
+            <h2>À propos de nous</h2>
+            <p>FM Launcher est une plateforme qui permet aux développeurs de publier et vendre leurs jeux en toute
+                simplicité.</p>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="games-section hidden-section">
+        <div class="container">
+            <h2>Jeux disponibles</h2>
+            <div id="game-list" class="game-list">
+                <!-- Jeux ajoutés dynamiquement ici -->
+            </div>
+            <div id="developer-add-game" class="hidden">
+                <h3>Ajouter un nouveau jeu</h3>
+                <form onsubmit="addGame(event)">
+                    <input type="text" id="game-name" placeholder="Nom du jeu" required>
+                    <input type="number" id="game-price" placeholder="Prix en €" required>
+                    <input type="file" id="game-image" accept="image/*">
+                    <textarea id="game-description" placeholder="Description du jeu (optionnel)"></textarea>
+                    <button type="submit">Ajouter le jeu</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" class="cart-section hidden-section">
+        <div class="container">
+            <h2>Votre Panier</h2>
+            <div id="cart-list" class="cart-list">
+                <!-- Items du panier ajoutés dynamiquement ici -->
+            </div>
+            <a href="https://www.paypal.com" class="btn-primary">Payer via PayPal</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section hidden-section">
+        <div class="container">
+            <h2>FAQ</h2>
+            <div class="faq-item">
+                <h3>Comment télécharger un jeu ?</h3>
+                <p>Pour télécharger un jeu, vous devez d'abord l'acheter via PayPal. Une fois l'achat effectué, un lien
+                    de téléchargement vous sera fourni.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Comment puis-je devenir développeur sur FM Launcher ?</h3>
+                <p>Pour devenir développeur, veuillez nous contacter via la section "Portail Développeur". Un mot de
+                    passe est requis pour accéder à cette section.</p>
+            </div>
+            <!-- Comment Section -->
+            <div class="comment-section">
+                <h3>Commentaires</h3>
+                <form onsubmit="addComment(event)">
+                    <input type="text" id="comment-user" placeholder="Nom d'utilisateur" required>
+                    <textarea id="comment-text" placeholder="Votre commentaire" required></textarea>
+                    <button type="submit">Ajouter le commentaire</button>
+                </form>
+                <div id="comment-list" class="comment-list">
+                    <!-- Commentaires ajoutés dynamiquement ici -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section id="signup-page" class="form-section hidden-section">
+        <div class="form-container">
+            <h2>Inscription</h2>
+            <form onsubmit="handleSignup(event)">
+                <input type="text" placeholder="Nom d'utilisateur" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mot de passe" required>
+                <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login-page" class="form-section hidden-section">
+        <div class="form-container">
+            <h2>Connexion</h2>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" placeholder="Nom d'utilisateur" required>
+                <input type="password" placeholder="Mot de passe" required>
+                <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="profile-section hidden-section">
+        <div class="profile-container">
+            <img id="profile-pic" src="default-profile.png" alt="Photo de profil">
+            <h3 id="username">Nom d'utilisateur</h3>
+            <form onsubmit="updateProfile(event)">
+                <label for="profile-pic-upload">Changer la photo de profil</label>
+                <input type="file" id="profile-pic-upload" accept="image/*" onchange="previewProfilePic(event)">
+                <input type="text" id="username-input" placeholder="Changer de nom d'utilisateur">
+                <button type="submit">Mettre à jour</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Developer Portal Section -->
+    <section id="developer" class="developer-portal hidden-section">
+        <div class="container">
+            <h2>Portail Développeur</h2>
+            <input type="text" id="user-search" class="search-bar" placeholder="Rechercher un utilisateur..."
+                oninput="filterUsers()">
+            <div id="user-list" class="user-list">
+                <!-- Liste des utilisateurs générée dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 FM Launcher. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let users = [
+                { username: "devUser1", online: true, role: "user" },
+                { username: "devUser2", online: false, role: "user" },
+                { username: "adminUser", online: true, role: "admin" },
+            ];
+
+            let games = [];
+            let cart = [];
+            let comments = [];
+
+            // Navigation logic
+            function navigate(section) {
+                const sections = document.querySelectorAll("section");
+                sections.forEach(sec => sec.classList.add("hidden-section"));
+                document.getElementById(section).classList.remove("hidden-section");
+
+                const navLinks = document.querySelectorAll("header nav ul li a");
+                navLinks.forEach(link => link.classList.remove("active"));
+                document.querySelector(`[onclick="navigate('${section}')"]`).classList.add("active");
+            }
+
+            window.navigate = navigate;
+
+            // Form handling
+            function showSignup() {
+                navigate("signup-page");
+            }
+
+            function showLogin() {
+                navigate("login-page");
+            }
+
+            window.showSignup = showSignup;
+            window.showLogin = showLogin;
+
+            function handleSignup(event) {
+                event.preventDefault();
+                alert("Inscription réussie!");
+                document.getElementById("signup-link").classList.add("hidden");
+                document.getElementById("login-link").classList.add("hidden");
+                document.getElementById("profile-link").classList.remove("hidden");
+                document.getElementById("developer-link").classList.remove("hidden");
+                navigate('home');
+            }
+
+            window.handleSignup = handleSignup;
+
+            function handleLogin(event) {
+                event.preventDefault();
+                alert("Connexion réussie!");
+                document.getElementById("signup-link").classList.add("hidden");
+                document.getElementById("login-link").classList.add("hidden");
+                document.getElementById("profile-link").classList.remove("hidden");
+                document.getElementById("developer-link").classList.remove("hidden");
+                navigate('home');
+            }
+
+            window.handleLogin = handleLogin;
+
+            // Profile handling
+            function previewProfilePic(event) {
+                const profilePic = document.getElementById("profile-pic");
+                profilePic.src = URL.createObjectURL(event.target.files[0]);
+            }
+
+            function updateProfile(event) {
+                event.preventDefault();
+                const newUsername = document.getElementById("username-input").value;
+                if (newUsername) {
+                    document.getElementById("username").innerText = newUsername;
+                    alert("Profil mis à jour!");
+                }
+            }
+
+            window.previewProfilePic = previewProfilePic;
+            window.updateProfile = updateProfile;
+
+            // Developer portal
+            function promptPassword() {
+                const password = prompt("Entrez le mot de passe du portail développeur :");
+                if (password === "Big_M93") {
+                    navigate("developer");
+                } else {
+                    alert("Mot de passe incorrect.");
+                }
+            }
+
+            window.promptPassword = promptPassword;
+
+            function renderUserList() {
+                const userList = document.getElementById("user-list");
+                userList.innerHTML = "";
+                users.forEach(user => {
+                    const userItem = document.createElement("div");
+                    userItem.classList.add("user-item");
+                    userItem.innerHTML = `
+                        <span>${user.username}</span>
+                        <span class="user-status">${user.online ? "En ligne" : "Hors ligne"}</span>
+                        <button onclick="addRole('${user.username}')">Ajouter un rôle</button>
+                    `;
+                    userList.appendChild(userItem);
+                });
+            }
+
+            function addRole(username) {
+                const role = prompt(`Ajouter un rôle pour ${username}:`);
+                const user = users.find(u => u.username === username);
+                if (user && role) {
+                    user.role = role;
+                    alert(`Rôle '${role}' ajouté à ${username}.`);
+                    renderUserList();
+                }
+            }
+
+            window.addRole = addRole;
+
+            function filterUsers() {
+                const query = document.getElementById("user-search").value.toLowerCase();
+                users.forEach(user => {
+                    const userItem = document.querySelector(`.user-item:contains('${user.username}')`);
+                    if (user.username.toLowerCase().includes(query)) {
+                        userItem.style.display = "block";
+                    } else {
+                        userItem.style.display = "none";
+                    }
+                });
+            }
+
+            window.filterUsers = filterUsers;
+
+            // Game management
+            function renderGameList() {
+                const gameList = document.getElementById("game-list");
+                gameList.innerHTML = "";
+                games.forEach(game => {
+                    const gameItem = document.createElement("div");
+                    gameItem.classList.add("game");
+                    gameItem.innerHTML = `
+                        <h3>${game.name}</h3>
+                        <p>${game.description}</p>
+                        <p>Prix: ${game.price}€</p>
+                        <button onclick="addToCart('${game.name}')">Ajouter au panier</button>
+                        ${userIsAdmin() ? `<button onclick="deleteGame('${game.name}')">Supprimer le jeu</button>` : ''}
+                    `;
+                    if (game.image) {
+                        const img = document.createElement("img");
+                        img.src = game.image;
+                        img.alt = "Image du jeu";
+                        img.style.width = "150px";
+                        gameItem.prepend(img);
+                    }
+                    gameList.appendChild(gameItem);
+                });
+            }
+
+            function addGame(event) {
+                event.preventDefault();
+                const name = document.getElementById("game-name").value;
+                const price = document.getElementById("game-price").value;
+                const image = document.getElementById("game-image").files[0];
+                const description = document.getElementById("game-description").value;
+                const imageUrl = image ? URL.createObjectURL(image) : "";
+
+                games.push({ name, price, image: imageUrl, description });
+                renderGameList();
+                alert("Jeu ajouté avec succès!");
+            }
+
+            window.addGame = addGame;
+
+            function addToCart(gameName) {
+                const game = games.find(g => g.name === gameName);
+                if (game) {
+                    cart.push(game);
+                    renderCart();
+                    alert(`${game.name} ajouté au panier.`);
+                }
+            }
+
+            window.addToCart = addToCart;
+
+            function renderCart() {
+                const cartList = document.getElementById("cart-list");
+                cartList.innerHTML = "";
+                cart.forEach(item => {
+                    const cartItem = document.createElement("div");
+                    cartItem.classList.add("cart-item");
+                    cartItem.innerHTML = `
+                        <h4>${item.name}</h4>
+                        <p>Prix: ${item.price}€</p>
+                    `;
+                    cartList.appendChild(cartItem);
+                });
+            }
+
+            function deleteGame(gameName) {
+                games = games.filter(game => game.name !== gameName);
+                renderGameList();
+                alert("Jeu supprimé avec succès!");
+            }
+
+            window.deleteGame = deleteGame;
+
+            function userIsAdmin() {
+                // Pour cette démo, on suppose que l'utilisateur est un admin si son nom est "adminUser"
+                return document.getElementById("username").innerText === "adminUser";
+            }
+
+            // Comment management
+            function renderComments() {
+                const commentList = document.getElementById("comment-list");
+                commentList.innerHTML = "";
+                comments.forEach(comment => {
+                    const commentItem = document.createElement("div");
+                    commentItem.classList.add("comment");
+                    commentItem.innerHTML = `
+                        <p><strong>${comment.user}</strong></p>
+                        <p>${comment.text}</p>
+                        ${userCanDeleteComments() ? `<button onclick="deleteComment('${comment.id}')">Supprimer</button>` : ''}
+                    `;
+                    commentList.appendChild(commentItem);
+                });
+            }
+
+            function addComment(event) {
+                event.preventDefault();
+                const user = document.getElementById("comment-user").value;
+                const text = document.getElementById("comment-text").value;
+
+                const id = new Date().getTime().toString();
+                comments.push({ id, user, text });
+                renderComments();
+                alert("Commentaire ajouté avec succès!");
+            }
+
+            window.addComment = addComment;
+
+            function deleteComment(commentId) {
+                comments = comments.filter(comment => comment.id !== commentId);
+                renderComments();
+                alert("Commentaire supprimé avec succès!");
+            }
+
+            window.deleteComment = deleteComment;
+
+            function userCanDeleteComments() {
+                // Supposons que l'utilisateur peut supprimer des commentaires s'il est admin
+                return userIsAdmin();
+            }
+
+            // Initial rendering
+            renderUserList();
+            renderGameList();
+            renderComments();
+            renderCart();
+        });
+    </script>
+</body>
+
+</html>
